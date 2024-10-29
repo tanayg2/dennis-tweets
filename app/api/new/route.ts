@@ -1,10 +1,12 @@
-import { Post } from "@/lib/types"
+import { Database } from "@/lib/db.types"
 import { getPostType } from "@/lib/utils"
-import { createClient } from "@/utils/supabase/server"
-import { NextRequest } from "next/server"
+import { createClient } from "@supabase/supabase-js"
 
 export async function POST(request: Request) {
-  const supabase = await createClient()
+  const supabase = createClient<Database>(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SERVICE_KEY!
+  )
 
   // read data from request body (type readable stream)
   const data = await request.json()
@@ -33,19 +35,20 @@ export async function POST(request: Request) {
   }
 
   console.log("here4")
-  const newPost: Partial<Post> = {
-    author: data.query.msisdn ?? data.body.from,
+  const owner = data.query.msisdn ?? data.body.from
+  const newPost: Database["public"]["Tables"]["posts"]["Insert"] = {
+    owner,
     url,
     type,
   }
-  console.log("Data: ", data)
+  console.log("Data: ", newPost)
 
   try {
-    console.log("here5")
-    const res = await supabase.from("posts").insert([data])
-    return Response.json(res, { status: 204 })
+    console.log("here5", newPost)
+    const res = await supabase.from("posts").insert(newPost)
+    return Response.json(res, { status: 200 })
   } catch (e) {
-    console.log("here6")
+    console.error(e)
     return Response.json(`Error adding document: ${e}`, { status: 500 })
   }
   // const token = request.headers.authorization?.split(" ")[1];
