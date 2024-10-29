@@ -1,21 +1,21 @@
 import { Database } from "@/lib/db.types"
 import { getPostType } from "@/lib/utils"
 import { createClient } from "@supabase/supabase-js"
+import { fromPairs } from "lodash"
 
+type VonageRequest = {
+  msisdn: string
+  text: string
+}
 export async function POST(request: Request) {
   const supabase = createClient<Database>(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.SUPABASE_SERVICE_ROLE_KEY!
   )
 
-  // read data from request body (type readable stream)
-  const data = await request.json()
+  const body = await processRequestBody(request)
 
-  // if (data.query) {
-  //   console.log("Query params: ", data.query)
-  // }
-
-  const url = data.query.text ?? data.body.text
+  const url = body.text
   if (!url) {
     return Response.json("No link found in data", { status: 400 })
   }
@@ -30,7 +30,7 @@ export async function POST(request: Request) {
     return Response.json(`Invalid URL ${url}`, { status: 400 })
   }
 
-  const owner = data.query.msisdn ?? data.body.from
+  const owner = body.msisdn
   const newPost: Database["public"]["Tables"]["posts"]["Insert"] = {
     owner,
     url,
@@ -50,4 +50,21 @@ export async function POST(request: Request) {
   // } else {
   //   console.log("Invalid signature");
   // }
+}
+
+const processRequestBody = async (request: Request): Promise<VonageRequest> => {
+try { 
+  const body = await request.body?.getReader().read().then((r) => {
+    return new TextDecoder().decode(r.value)
+  })
+
+  return fromPairs(decodeURIComponent(body?? "").split("&").map(pair => pair.split('='))) as VonageRequest
+ } catch (e) {
+  try {
+    return await request.json()
+  } catch (e) {
+    console.error(e)
+    return { msisdn: "", text: "" }
+  }
+ }
 }
