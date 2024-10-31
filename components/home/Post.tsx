@@ -16,7 +16,7 @@ export const Post = (props: PostProps) => {
   return (
     <div>
       {/* <p>@{props.post.author.username}</p> */}
-      <XEmbed url={props.post.url} width={430} />
+      <XEmbed url={props.post.url} width={390} />
       <time>{new Date(props.post.created_at).toUTCString()}</time>
       {/* <EmojiPicker reactionsDefaultOpen={true} allowExpandReactions={false} /> */}
     </div>

@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "@radix-ui/react-checkbox": "^1.1.1",
+    "@radix-ui/react-dialog": "^1.1.2",
     "@radix-ui/react-dropdown-menu": "^2.1.1",
     "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-slot": "^1.1.0",
@@ -23,7 +24,9 @@
     "prettier": "^3.3.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-social-media-embed": "^2.5.17"
+    "react-phone-number-input": "^3.4.9",
+    "react-social-media-embed": "^2.5.17",
+    "zustand": "^5.0.1"
   },
   "devDependencies": {
     "@types/lodash": "^4.17.12",
