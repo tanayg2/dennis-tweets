@@ -7,6 +7,31 @@ export type Json =
   | Json[]
 
 export type Database = {
+  graphql_public: {
+    Tables: {
+      [_ in never]: never
+    }
+    Views: {
+      [_ in never]: never
+    }
+    Functions: {
+      graphql: {
+        Args: {
+          operationName?: string
+          query?: string
+          variables?: Json
+          extensions?: Json
+        }
+        Returns: Json
+      }
+    }
+    Enums: {
+      [_ in never]: never
+    }
+    CompositeTypes: {
+      [_ in never]: never
+    }
+  }
   public: {
     Tables: {
       posts: {
@@ -21,7 +46,7 @@ export type Database = {
           created_at?: string
           id?: number
           owner?: string | null
-          type: Database["public"]["Enums"]["post_type"]
+          type?: Database["public"]["Enums"]["post_type"]
           url?: string
         }
         Update: {
@@ -35,28 +60,41 @@ export type Database = {
       }
       user_details: {
         Row: {
-          id: string
           phone_number: number | null
           profile_picture: string | null
+          user_id: string
           username: string
         }
         Insert: {
-          id: string
           phone_number?: number | null
           profile_picture?: string | null
+          user_id: string
           username: string
         }
         Update: {
-          id?: string
           phone_number?: number | null
           profile_picture?: string | null
+          user_id?: string
           username?: string
         }
         Relationships: []
       }
     }
     Views: {
-      [_ in never]: never
+      enriched_posts: {
+        Row: {
+          created_at: string | null
+          id: number | null
+          owner: string | null
+          phone_number: number | null
+          profile_picture: string | null
+          type: Database["public"]["Enums"]["post_type"] | null
+          url: string | null
+          user_id: string | null
+          username: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       [_ in never]: never

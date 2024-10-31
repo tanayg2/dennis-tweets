@@ -7,9 +7,9 @@ import { useLoginModal } from "../../app/_hooks/useLoginModal"
 import { useUser } from "@/hooks/useUser"
 
 export const BottomNavbar = () => {
-  const user = useUser()
   const path = usePathname()
   const loginModal = useLoginModal()
+  const { user } = useUser()
 
   return (
     <>

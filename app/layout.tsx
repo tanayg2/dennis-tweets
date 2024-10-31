@@ -2,7 +2,7 @@ import "./globals.css"
 import { ReactNode } from "react"
 import { BottomNavbar } from "../components/navigation/BottomNavbar"
 import { TopNavbar } from "../components/navigation/TopNavbar"
-import { LoginModal } from "../components/auth/LoginModal"
+import { GlobalProvider } from "@/components/providers/GlobalProvider"
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
@@ -13,7 +13,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           {children}
         </div>
         <BottomNavbar />
-        <LoginModal />
+        <GlobalProvider />
       </body>
     </html>
   )

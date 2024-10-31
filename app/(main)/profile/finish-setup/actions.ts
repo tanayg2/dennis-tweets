@@ -1,0 +1,20 @@
+"use server"
+import { createClient } from "@/utils/supabase/server"
+
+export const updatePhoneNumber = async (userId: string, phoneNumber: number) => {
+  const supabase = await createClient()
+
+  const { data, error } = await supabase.from("user_details").update({ phone_number: phoneNumber }).eq("id", userId)
+  if (error) throw error
+  return data
+}
+
+export const updateUsername = async (userId: string, username: string) => {
+  const supabase = await createClient()
+
+  const { data, error } = await supabase.from("user_details").update
+    ({ username }).eq("id", userId)
+  if (error) throw error
+
+  return data
+}

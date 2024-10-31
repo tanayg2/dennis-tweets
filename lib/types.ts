@@ -1,3 +1,5 @@
+import { User } from "@supabase/supabase-js"
+
 export type Source = "twitter" | "tiktok" | "instagram"
 
 export type Post = {
@@ -7,12 +9,10 @@ export type Post = {
   created_at: string
 }
 
-export type User = {
-  name: string
-  username: string
-  profile_picture: string
+export type UserDetail = {
+  username?: string
+  profile_picture?: string
+  phone_number?: string
 }
 
-export type PostEnriched = Post & {
-  author: User
-}
+export type UserEnriched = User & UserDetail
