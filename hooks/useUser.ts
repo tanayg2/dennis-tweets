@@ -31,7 +31,7 @@ export const useFetchUser = () => {
         const user_details = await supabase
         .from("user_details")
         .select()
-        .eq("id", user.id) as { data: UserEnriched[], count: number }
+        .eq("user_id", user.id) as { data: UserEnriched[], count: number }
 
         console.log("USER DETAILS", user_details)
 
