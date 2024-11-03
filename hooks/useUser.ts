@@ -36,7 +36,8 @@ export const useFetchUser = () => {
         console.log("USER DETAILS", user_details)
 
         if (user_details.count !== 1) {
-          throw new Error("User details not found")
+          console.error("User details not found")
+          return
         }
 
         set({ userEnriched: user_details.data[0] })
