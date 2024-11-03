@@ -2,7 +2,8 @@
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
 import { createClient } from "@/utils/supabase/client"
-import { useLoginModal } from "../../app/_hooks/useLoginModal"
+import { useLoginModal } from "../hooks/useLoginModal"
+import { RiGoogleFill } from "@remixicon/react"
 
 export const LoginModal = () => {
   const supabase = createClient()
@@ -20,9 +21,16 @@ export const LoginModal = () => {
               },
             })
           }
+          className="bg-[#DB4437] text-white after:flex-1 hover:bg-[#DB4437]/90"
         >
-          Continue with Google
+          <span className="pointer-events-none me-2 flex-1">
+            <RiGoogleFill className="opacity-60" size={16} aria-hidden="true" />
+          </span>
+          Login with Google
         </Button>
+        <p>
+          <i>If you want sign in with apple or anything lmk</i>
+        </p>
       </DialogContent>
     </Dialog>
   )

@@ -8,7 +8,7 @@ export default async function Page() {
     data: { user },
   } = await supabase.auth.getUser()
 
-  if (!user) redirect("/home")
+  if (!user) redirect("/")
 
   return (
     <div>

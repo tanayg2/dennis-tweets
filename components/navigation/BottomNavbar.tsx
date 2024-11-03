@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button"
 import { BellIcon, HomeIcon, UserIcon } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { useLoginModal } from "../../app/_hooks/useLoginModal"
+import { useLoginModal } from "../hooks/useLoginModal"
 import { useUser } from "@/hooks/useUser"
 
 export const BottomNavbar = () => {
@@ -16,8 +16,8 @@ export const BottomNavbar = () => {
       <div className="sticky bottom-0 z-50 flex justify-around items-center w-screen min-w-full flex-row border-t-[1px] bg-background p-3 pb-2">
         {user ? (
           <>
-            <Link href="/home">
-              <HomeIcon size={24} className={getIconColor(path, "/home")} />
+            <Link href="/">
+              <HomeIcon size={24} className={getIconColor(path, "/")} />
             </Link>
             <Link href="/notifications">
               <BellIcon

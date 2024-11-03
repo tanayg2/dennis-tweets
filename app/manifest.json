@@ -1,0 +1,17 @@
+{
+  "short_name": "Dennis Tweets",
+  "name": "Dennis Tweets",
+  "description": "Share your favorite social media posts.",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#366eff",
+  "background_color": "#ffffff",
+  "handle_links": "not-preferred",
+  "scope": "/",
+  "protocol_handlers": [
+    {
+      "protocol": "web+storeapp",
+      "url": "/?type=%s"
+    }
+  ]
+}

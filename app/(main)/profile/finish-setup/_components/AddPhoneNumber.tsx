@@ -9,7 +9,7 @@ import { parseInt } from "lodash"
 export const AddPhoneNumber = (props: { userId: string }) => {
   const [phoneNumber, setPhoneNumber] = useState("")
   return (
-    <div>
+    <div className="grid grid-cols-[1fr_80px] gap-x-2">
       <PhoneNumberInput
         id="phone"
         value={phoneNumber}
@@ -27,7 +27,7 @@ export const AddPhoneNumber = (props: { userId: string }) => {
           }
         }}
       >
-        Add phone number
+        Submit
       </Button>
     </div>
   )

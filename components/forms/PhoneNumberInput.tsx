@@ -16,22 +16,19 @@ type PhoneNumberInputProps = {
 
 export default function PhoneNumberInput(props: PhoneNumberInputProps) {
   return (
-    <div className="space-y-2" dir="ltr">
-      <Label htmlFor={props.id}>{props.label}</Label>
-      <RPNInput.default
-        className="flex rounded-lg shadow-sm shadow-black/[.04]"
-        international
-        flagComponent={FlagComponent}
-        countrySelectComponent={CountrySelect}
-        inputComponent={PhoneInput}
-        id={props.id}
-        placeholder="Enter phone number"
-        value={props.value}
-        onChange={(value?: RPNInput.Value) =>
-          props.handleChange(value?.toString() ?? "")
-        }
-      />
-    </div>
+    <RPNInput.default
+      className="flex rounded-lg shadow-sm shadow-black/[.04]"
+      international
+      flagComponent={FlagComponent}
+      countrySelectComponent={CountrySelect}
+      inputComponent={PhoneInput}
+      id={props.id}
+      placeholder="Enter phone number"
+      value={props.value}
+      onChange={(value?: RPNInput.Value) =>
+        props.handleChange(value?.toString() ?? "")
+      }
+    />
   )
 }
 

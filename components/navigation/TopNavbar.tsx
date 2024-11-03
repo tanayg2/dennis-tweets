@@ -16,7 +16,7 @@ export const TopNavbar = () => {
 }
 
 const resolvePageTitle = (pathname: string) => {
-  if (pathname === "/home") return "Home"
+  if (pathname === "/") return "Home"
   if (pathname === "/notifications") return "Notifications"
   if (pathname === "/profile") return "Profile"
   if (pathname === "/profile/finish-setup") return "Finish Setup"

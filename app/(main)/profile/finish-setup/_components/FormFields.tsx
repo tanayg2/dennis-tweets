@@ -6,16 +6,15 @@ import { AddPhoneNumber } from "./AddPhoneNumber"
 import { AddUsername } from "./AddUsername"
 
 export const FormFields = () => {
-  const { userEnriched } = useUser()
+  const { user, userEnriched } = useUser()
 
-  if (!userEnriched) return null
-
+  if (!user) return null
   return (
-    <div>
+    <div className="space-y-2">
       {userEnriched?.username ? (
         <p>{userEnriched.username}</p>
       ) : (
-        <AddUsername userId={userEnriched.id} />
+        <AddUsername userId={user.id} />
       )}
 
       {userEnriched?.phone_number ? (
@@ -23,7 +22,7 @@ export const FormFields = () => {
       ) : (
         <Label htmlFor="phone">
           Phone number
-          <AddPhoneNumber userId={userEnriched.id} />
+          <AddPhoneNumber userId={user.id} />
         </Label>
       )}
     </div>

@@ -12,17 +12,19 @@ export const AddUsername = (props: { userId: string }) => {
   return (
     <div>
       <Label htmlFor="username">Username</Label>
-      <InputWithStartIcon
-        id="username"
-        inputProps={{
-          value: username,
-          onChange: (e) => setUsername(e.target.value),
-        }}
-        icon={AtSignIcon}
-      />
-      <Button onClick={async () => updateUsername(props.userId, username)}>
-        Add username
-      </Button>
+      <div className="grid grid-cols-[1fr_80px] gap-x-2">
+        <InputWithStartIcon
+          id="username"
+          inputProps={{
+            value: username,
+            onChange: (e) => setUsername(e.target.value),
+          }}
+          icon={AtSignIcon}
+        />
+        <Button onClick={async () => updateUsername(props.userId, username)}>
+          Submit
+        </Button>
+      </div>
     </div>
   )
 }
