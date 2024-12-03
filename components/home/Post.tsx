@@ -1,9 +1,7 @@
 "use client"
 import { Database } from "@/lib/db.types"
 import { InstagramEmbed, TikTokEmbed, XEmbed } from "react-social-media-embed"
-import { ReactionRow } from "./ReactionRow"
 import { useMemo } from "react"
-import { HeartButton } from "./HeartButton"
 
 type PostProps = {
   post: Database["public"]["Views"]["enriched_posts"]["Row"]

@@ -9,7 +9,7 @@ type HeartButtonProps = {
 }
 
 export const HeartButton = (props: HeartButtonProps) => {
-  const heartCount = use(() => fetchPostReactions(props.postId))
+  // const heartCount = use(() => fetchPostReactions(props.postId))
 
   const handleHeartClick = useCallback(async () => {
     if (!props.userId || !props.postId) return
