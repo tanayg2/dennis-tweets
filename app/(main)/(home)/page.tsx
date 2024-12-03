@@ -6,8 +6,8 @@ export default async function Page() {
   const posts = await fetchPublicPosts(0)
 
   return (
-    <div className="space-y-2">
-      {posts?.map((post) => <Post key={post.url} post={post} />)}
+    <div className="space-y-8">
+      {posts?.map((post) => <Post key={post.id} post={post} />)}
       <ScrollObserver />
     </div>
   )

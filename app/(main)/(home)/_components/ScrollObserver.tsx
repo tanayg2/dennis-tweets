@@ -35,7 +35,7 @@ export const ScrollObserver = () => {
     <div ref={ref} />
   ) : (
     Array.from(data.entries()).map(([id, post], idx) => (
-      <div key={id} {...(idx === data.size - 5 && { ref, id: "TEST" })}>
+      <div key={id} {...(idx === data.size - 2 && { ref, id: "TEST" })}>
         <Post post={post} />
       </div>
     ))

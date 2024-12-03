@@ -13,7 +13,7 @@ export const BottomNavbar = () => {
 
   return (
     <>
-      <div className="sticky bottom-0 z-50 flex justify-around items-center w-screen min-w-full flex-row border-t-[1px] border-gray-200 bg-white p-4 pb-3">
+      <div className="sticky bottom-0 z-50 flex justify-around items-center w-screen min-w-full flex-row border-t-[1px] border-gray-300 bg-white p-4 pb-3">
         <Link href="/">
           <HomeIcon size={24} className={getIconColor(path, "/")} />
         </Link>
