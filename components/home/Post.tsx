@@ -1,6 +1,9 @@
 "use client"
 import { Database } from "@/lib/db.types"
-import { XEmbed } from "react-social-media-embed"
+import { InstagramEmbed, TikTokEmbed, XEmbed } from "react-social-media-embed"
+import { ReactionRow } from "./ReactionRow"
+import { useMemo } from "react"
+import { HeartButton } from "./HeartButton"
 
 type PostProps = {
   post: Database["public"]["Views"]["enriched_posts"]["Row"]
@@ -11,7 +14,21 @@ export const Post = (props: PostProps) => {
   //   twitter: XEmbed,
   //   tiktok: TikTokEmbed,
   //   instagram: InstagramEmbed,
-  // }[props.post.type]
+  // }[props.post.type ?? "twitter"]
+
+  const Element = useMemo(() => {
+    if (!props.post.url) return null
+    switch (props.post.type) {
+      case "twitter":
+        return <XEmbed url={props.post.url} />
+      case "tiktok":
+        return <TikTokEmbed url={props.post.url} />
+      case "instagram":
+        return <InstagramEmbed url={props.post.url} />
+      default:
+        return null
+    }
+  }, [props.post.type])
 
   return (
     <div>
@@ -19,9 +36,10 @@ export const Post = (props: PostProps) => {
         From:{" "}
         {props.post.username ? `@${props.post.username}` : <i>anonymous</i>}
       </p>
-      <XEmbed url={props.post.url} width={390} />
+      {Element}
       {/* <time>{new Date(props.post.created_at).toUTCString()}</time> */}
-      {/* <EmojiPicker reactionsDefaultOpen={true} allowExpandReactions={false} /> */}
+      {/* <ReactionRow userId={props.userId} postId={props.post.id} /> */}
+      {/* <HeartButton userId={props.userId} postId={props.post.id} /> */}
     </div>
   )
 }

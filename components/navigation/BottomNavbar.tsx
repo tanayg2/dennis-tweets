@@ -13,30 +13,23 @@ export const BottomNavbar = () => {
 
   return (
     <>
-      <div className="sticky bottom-0 z-50 flex justify-around items-center w-screen min-w-full flex-row border-t-[1px] bg-background p-3 pb-2">
-        {user ? (
-          <>
-            <Link href="/">
-              <HomeIcon size={24} className={getIconColor(path, "/")} />
-            </Link>
-            <Link href="/notifications">
-              <BellIcon
-                size={24}
-                className={getIconColor(path, "/notifications")}
-              />
-            </Link>
-            <Link href="/profile">
-              <UserIcon size={24} className={getIconColor(path, "/profile")} />
-            </Link>
-          </>
-        ) : (
-          <>
-            <p>Sign in to start posting</p>
-            <Button onClick={() => loginModal.onOpenChange(true)}>
-              Sign in
-            </Button>
-          </>
-        )}
+      <div className="sticky bottom-0 z-50 flex justify-around items-center w-screen min-w-full flex-row border-t-[1px] border-gray-200 bg-white p-4 pb-3">
+        <Link href="/">
+          <HomeIcon size={24} className={getIconColor(path, "/")} />
+        </Link>
+        <Link href="/notifications">
+          <BellIcon
+            size={24}
+            className={getIconColor(path, "/notifications")}
+          />
+        </Link>
+        <Link
+          {...(user
+            ? { href: "/profile" }
+            : { href: "", onClick: () => loginModal.onOpenChange(true) })}
+        >
+          <UserIcon size={24} className={getIconColor(path, "/profile")} />
+        </Link>
       </div>
     </>
   )

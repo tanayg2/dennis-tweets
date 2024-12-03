@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation"
 export const TopNavbar = () => {
   const pathname = usePathname()
   return (
-    <div className="sticky bg-background bottom-0 z-50 grid grid-cols-[128px_1fr_128px] w-screen min-w-full border-b-[1px] border-b-gray-100 p-3">
+    <div className="sticky bg-white bottom-0 z-50 grid grid-cols-[128px_1fr_128px] w-screen min-w-full border-b-[1px] border-b-gray-200 p-3">
       <div className="text-start">
         <div></div>
       </div>

@@ -17,6 +17,7 @@
     "autoprefixer": "10.4.17",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "emoji-picker-react": "^4.12.0",
     "geist": "^1.2.1",
     "lodash": "^4.17.21",
     "lucide-react": "^0.436.0",
@@ -25,6 +26,7 @@
     "prettier": "^3.3.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-intersection-observer": "^9.13.1",
     "react-phone-number-input": "^3.4.9",
     "react-social-media-embed": "^2.5.17",
     "zustand": "^5.0.1"

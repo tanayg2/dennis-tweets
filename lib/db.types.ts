@@ -34,9 +34,60 @@ export type Database = {
   }
   public: {
     Tables: {
+      group_members: {
+        Row: {
+          group_id: string | null
+          joined_at: string
+          user_id: string | null
+        }
+        Insert: {
+          group_id?: string | null
+          joined_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          group_id?: string | null
+          joined_at?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "group_members_group_id_fkey"
+            columns: ["group_id"]
+            isOneToOne: false
+            referencedRelation: "groups"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      groups: {
+        Row: {
+          created_at: string
+          id: string
+          name: string | null
+          owner: string | null
+          slug: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name?: string | null
+          owner?: string | null
+          slug?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string | null
+          owner?: string | null
+          slug?: string | null
+        }
+        Relationships: []
+      }
       posts: {
         Row: {
           created_at: string
+          group_id: string
           id: number
           owner: string | null
           type: Database["public"]["Enums"]["post_type"]
@@ -44,6 +95,7 @@ export type Database = {
         }
         Insert: {
           created_at?: string
+          group_id?: string
           id?: number
           owner?: string | null
           type?: Database["public"]["Enums"]["post_type"]
@@ -51,12 +103,57 @@ export type Database = {
         }
         Update: {
           created_at?: string
+          group_id?: string
           id?: number
           owner?: string | null
           type?: Database["public"]["Enums"]["post_type"]
           url?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "posts_group_id_fkey"
+            columns: ["group_id"]
+            isOneToOne: false
+            referencedRelation: "groups"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      reactions: {
+        Row: {
+          content: string
+          created_at: string
+          post_id: number
+          user_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          post_id: number
+          user_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          post_id?: number
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reactions_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "enriched_posts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "reactions_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "posts"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user_details: {
         Row: {
@@ -84,6 +181,7 @@ export type Database = {
       enriched_posts: {
         Row: {
           created_at: string | null
+          group_id: string | null
           id: number | null
           owner: string | null
           phone_number: number | null
@@ -93,7 +191,15 @@ export type Database = {
           user_id: string | null
           username: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "posts_group_id_fkey"
+            columns: ["group_id"]
+            isOneToOne: false
+            referencedRelation: "groups"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Functions: {
