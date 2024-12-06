@@ -2,13 +2,7 @@ import { Post } from "@/components/home/Post"
 import { LoadMore } from "./_components/ScrollObserver"
 import { fetchPublicPosts } from "@/lib/queries/home"
 
-type PageParams = Promise<{
-  searchParams: {
-    ascending?: boolean
-  }
-}>
-
-export default async function Page(props: PageParams) {
+export default async function Page() {
   // const ascending = (await props).searchParams.ascending ?? false
   const posts = await fetchPublicPosts(0)
 
