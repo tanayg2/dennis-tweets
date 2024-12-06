@@ -4,8 +4,8 @@ import InputWithStartIcon from "@/components/forms/InputWithStartIcon"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { AtSignIcon } from "lucide-react"
-import { updateUsername } from "../actions"
 import { useState } from "react"
+import { updateUsername } from "../settings/actions"
 
 export const AddUsername = (props: { userId: string }) => {
   const [username, setUsername] = useState("")

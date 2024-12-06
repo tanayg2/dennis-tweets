@@ -3,6 +3,7 @@ import { Database } from "@/lib/db.types"
 import { InstagramEmbed, TikTokEmbed, XEmbed } from "react-social-media-embed"
 import { useMemo } from "react"
 import { toRelative } from "@/lib/utils"
+import { HeartButton } from "./HeartButton"
 
 type PostProps = {
   post: Database["public"]["Views"]["enriched_posts"]["Row"]
@@ -27,14 +28,13 @@ export const Post = (props: PostProps) => {
   return (
     <div>
       {Element}
-      <div className="flex justify-between">
+      <div className="flex justify-between px-2 text-border">
         {props.post.username ? `@${props.post.username}` : <i>anonymous</i>}
-        <time className="text-gray-600 italic">
+        <time className="text-primary italic">
           {toRelative(new Date(props.post.created_at ?? ""))}
         </time>
       </div>
-      {/* <ReactionRow userId={props.userId} postId={props.post.id} /> */}
-      {/* <HeartButton userId={props.userId} postId={props.post.id} /> */}
+      {/* <HeartButton userId={props.post.user_id} postId={props.post.id} /> */}
     </div>
   )
 }

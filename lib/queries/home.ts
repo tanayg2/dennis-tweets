@@ -2,12 +2,12 @@ import { createClient } from "@/utils/supabase/server"
 
 const PAGE_SIZE = 5
 
-export async function fetchPublicPosts(page: number = 0) {
+export async function fetchPublicPosts(page: number = 0, ascending: boolean = false) {
   const supabase = await createClient()
   const { data: posts, error } = await supabase
     .from("enriched_posts")
     .select("*")
-    .order("created_at", { ascending: false })
+    .order("created_at", { ascending })
     .limit(PAGE_SIZE)
     .range(page * PAGE_SIZE, (page + 1) * PAGE_SIZE - 1)
 

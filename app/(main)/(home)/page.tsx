@@ -1,14 +1,21 @@
 import { Post } from "@/components/home/Post"
-import { ScrollObserver } from "./_components/ScrollObserver"
+import { LoadMore } from "./_components/ScrollObserver"
 import { fetchPublicPosts } from "@/lib/queries/home"
 
-export default async function Page() {
+type PageParams = Promise<{
+  searchParams: {
+    ascending?: boolean
+  }
+}>
+
+export default async function Page(props: PageParams) {
+  // const ascending = (await props).searchParams.ascending ?? false
   const posts = await fetchPublicPosts(0)
 
   return (
     <div className="space-y-8">
       {posts?.map((post) => <Post key={post.id} post={post} />)}
-      <ScrollObserver />
+      <LoadMore />
     </div>
   )
 }

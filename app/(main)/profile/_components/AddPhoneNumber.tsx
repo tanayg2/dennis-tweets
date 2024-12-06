@@ -3,8 +3,8 @@
 import PhoneNumberInput from "@/components/forms/PhoneNumberInput"
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
-import { updatePhoneNumber } from "../actions"
 import { parseInt } from "lodash"
+import { updatePhoneNumber } from "../settings/actions"
 
 export const AddPhoneNumber = (props: { userId: string }) => {
   const [phoneNumber, setPhoneNumber] = useState("")

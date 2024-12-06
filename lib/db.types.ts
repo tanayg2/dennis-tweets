@@ -182,7 +182,7 @@ export type Database = {
         Row: {
           created_at: string | null
           group_id: string | null
-          id: number | null
+          id: number
           owner: string | null
           phone_number: number | null
           profile_picture: string | null

@@ -10,6 +10,7 @@ export const fetchPostReactions = async (postId: number) => {
       .from("reactions")
       .select("*")
       .eq("post_id", postId)
+    console.log(postId, res)
     return res
   } catch (e) {
     console.error(e)
@@ -39,7 +40,7 @@ export const leaveReaction = async (
   }
 }
 
-export const fetchMorePosts = async (page: number) => {
+export const fetchMorePosts = async (page: number, ascending = false) => {
   const pageSize = 10
   const supabase = await createClient()
 
@@ -50,7 +51,7 @@ export const fetchMorePosts = async (page: number) => {
   const { data: posts, error } = await supabase
     .from("enriched_posts")
     .select("*")
-    .order("created_at", { ascending: false })
+    .order("created_at", { ascending })
     .limit(pageSize)
     .range(page * pageSize, (page + 1) * pageSize - 1)
   console.log(posts)

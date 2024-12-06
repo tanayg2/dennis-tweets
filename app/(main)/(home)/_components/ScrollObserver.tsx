@@ -5,8 +5,9 @@ import { useInView } from "react-intersection-observer"
 import { fetchMorePosts } from "../actions"
 import { Database } from "@/lib/db.types"
 import { Post } from "@/components/home/Post"
+import { useParams, useSearchParams } from "next/navigation"
 
-export const ScrollObserver = () => {
+export const LoadMore = () => {
   const { ref, inView } = useInView()
   const [data, setData] = useState(
     new Map<string, Database["public"]["Views"]["enriched_posts"]["Row"]>(),
@@ -17,9 +18,14 @@ export const ScrollObserver = () => {
     setPage(1)
   }, [])
 
+  const params = useSearchParams()
+
   useEffect(() => {
     async function run() {
-      const next = await fetchMorePosts(page)
+      const next = await fetchMorePosts(
+        page,
+        params.get("ascending") === "true",
+      )
       if (!next) return
       setData((prev) => new Map([...prev, ...next]))
     }

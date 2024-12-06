@@ -5,18 +5,18 @@ import { useUser } from "@/hooks/useUser"
 import { AddPhoneNumber } from "./AddPhoneNumber"
 import { AddUsername } from "./AddUsername"
 import { useEffect } from "react"
-import { createUserDetails } from "../actions"
+import { createUserDetails } from "../settings/actions"
 
 export const FormFields = () => {
   const { user, userEnriched } = useUser()
 
-  if (!user) return null
-
   useEffect(() => {
-    if (!userEnriched) {
+    if (user && !userEnriched) {
       createUserDetails(user.id)
     }
   }, [user])
+
+  if (!user) return null
 
   return (
     <div className="space-y-2">

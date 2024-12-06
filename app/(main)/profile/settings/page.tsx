@@ -1,6 +1,6 @@
 import { createClient } from "@/utils/supabase/server"
 import { redirect } from "next/navigation"
-import { FormFields } from "./_components/FormFields"
+import { FormFields } from "../_components/FormFields"
 
 export default async function Page() {
   const supabase = await createClient()

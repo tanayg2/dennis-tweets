@@ -10,14 +10,14 @@ export const LoginModal = () => {
   const loginModal = useLoginModal()
   return (
     <Dialog open={loginModal.isOpen} onOpenChange={loginModal.onOpenChange}>
-      <DialogContent className="w-[calc(100vw-30px)] bg-background">
+      <DialogContent className="w-[calc(100vw-30px)] bg-white">
         <DialogTitle>Login to your account</DialogTitle>
         <Button
           onClick={() =>
             supabase.auth.signInWithOAuth({
               provider: "google",
               options: {
-                redirectTo: `${process.env["NEXT_PUBLIC_URL"]}/auth/callback?next=/profile/finish-setup`,
+                redirectTo: `${process.env["NEXT_PUBLIC_URL"]}/auth/callback?next=/`,
               },
             })
           }

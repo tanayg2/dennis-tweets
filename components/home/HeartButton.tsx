@@ -1,7 +1,8 @@
 "use client"
 
 import { fetchPostReactions, leaveReaction } from "@/app/(main)/(home)/actions"
-import { use, useCallback } from "react"
+import { cn } from "@/utils/cn"
+import { use, useCallback, useEffect, useMemo, useState } from "react"
 
 type HeartButtonProps = {
   userId: string | null
@@ -9,7 +10,17 @@ type HeartButtonProps = {
 }
 
 export const HeartButton = (props: HeartButtonProps) => {
-  // const heartCount = use(() => fetchPostReactions(props.postId))
+  // const postReactionsPromise = useMemo(
+  //   () => fetchPostReactions(props.postId).then((resp) => resp?.count),
+  //   [props.postId],
+  // )
+  // const reactionCount = use(postReactionsPromise)
+  const [reactionCount, setReactionCount] = useState<number | null>(null)
+  useEffect(() => {
+    fetchPostReactions(props.postId).then((resp) =>
+      setReactionCount(resp?.count ?? null),
+    )
+  }, [props.postId])
 
   const handleHeartClick = useCallback(async () => {
     if (!props.userId || !props.postId) return
@@ -19,9 +30,12 @@ export const HeartButton = (props: HeartButtonProps) => {
   return (
     <button
       onClick={handleHeartClick}
-      className="py-2 px-4 outline outline-1 outline-gray-400 rounded-lg"
+      className="py-2 px-4 rounded-lg hover:bg-secondary transition-colors duration-75 inline-flex gap-x-1 items-center justify-center"
     >
-      ❤️
+      <div>❤️</div>
+      <div className={cn("text-xs", reactionCount && "invisible")}>
+        {reactionCount}
+      </div>
     </button>
   )
 }
