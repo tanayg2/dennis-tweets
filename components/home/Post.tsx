@@ -4,6 +4,7 @@ import { InstagramEmbed, TikTokEmbed, XEmbed } from "react-social-media-embed"
 import { useMemo } from "react"
 import { toRelative } from "@/lib/utils"
 import { HeartButton } from "./HeartButton"
+import { ReactionsRow } from "./ReactionRow"
 
 type PostProps = {
   post: Database["public"]["Views"]["enriched_posts"]["Row"]
@@ -34,11 +35,7 @@ export const Post = (props: PostProps) => {
           {toRelative(new Date(props.post.created_at ?? ""))}
         </time>
       </div>
-      <HeartButton
-        userId={props.post.user_id}
-        postId={props.post.id}
-        reactionCount={props.post.reaction_count ?? 0}
-      />
+      <ReactionsRow post={props.post} />
     </div>
   )
 }
