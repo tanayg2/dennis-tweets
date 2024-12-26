@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
 import { createClient } from "@/utils/supabase/client"
-import { useLoginModal } from "../hooks/useLoginModal"
+import { useLoginModal } from "../../hooks/useLoginModal"
 import { RiGoogleFill } from "@remixicon/react"
 
 export const LoginModal = () => {

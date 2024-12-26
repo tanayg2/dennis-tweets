@@ -186,6 +186,7 @@ export type Database = {
           owner: string | null
           phone_number: number | null
           profile_picture: string | null
+          reaction_count: number | null
           type: Database["public"]["Enums"]["post_type"] | null
           url: string | null
           user_id: string | null

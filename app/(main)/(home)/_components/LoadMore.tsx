@@ -5,17 +5,17 @@ import { useInView } from "react-intersection-observer"
 import { fetchMorePosts } from "../actions"
 import { Database } from "@/lib/db.types"
 import { Post } from "@/components/home/Post"
-import { useParams, useSearchParams } from "next/navigation"
+import { useSearchParams } from "next/navigation"
 
 export const LoadMore = () => {
   const { ref, inView } = useInView()
   const [data, setData] = useState(
     new Map<string, Database["public"]["Views"]["enriched_posts"]["Row"]>(),
   )
-  const [page, setPage] = useState(1)
+  const [page, setPage] = useState(0)
 
   useEffect(() => {
-    setPage(1)
+    setPage(0)
   }, [])
 
   const params = useSearchParams()
