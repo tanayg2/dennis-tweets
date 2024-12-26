@@ -5,6 +5,7 @@ import {
   fetchPostReaction,
   leaveReaction,
 } from "@/app/(main)/(home)/actions"
+import { useUser } from "@/hooks/useUser"
 import { cn } from "@/utils/cn"
 import { Heart } from "lucide-react"
 import { use, useCallback, useEffect, useState, useTransition } from "react"
@@ -16,33 +17,32 @@ type HeartButtonProps = {
 }
 
 export const HeartButton = (props: HeartButtonProps) => {
+  const user = useUser()
   const [reactionCount, setReactionCount] = useState(props.reactionCount)
 
   const [isHearted, setIsHearted] = useState(false)
   useEffect(() => {
     async function run() {
-      if (!props.userId) return
-      const reaction = await fetchPostReaction(props.userId, props.postId)
+      if (!user.user) return
+      const reaction = await fetchPostReaction(user.user.id, props.postId)
       console.log("react", reaction)
       setIsHearted(!!reaction?.length)
     }
 
     run()
-  }, [props.userId, props.postId])
-
-  if (props.postId === 581) console.log("isHearted", isHearted)
+  }, [user, props.postId])
 
   const handleHeartClick = useCallback(async () => {
-    if (!props.userId || !props.postId) return
+    if (!user.user || !props.postId) return
     console.log(isHearted, "delete")
     if (isHearted) {
       setReactionCount(reactionCount - 1)
       setIsHearted(false)
-      deleteReaction(props.userId, props.postId)
+      deleteReaction(user.user.id, props.postId)
     } else {
       setReactionCount(reactionCount + 1)
       setIsHearted(true)
-      leaveReaction(props.userId, props.postId, "❤️")
+      leaveReaction(user.user.id, props.postId, "❤️")
     }
   }, [props.userId, props.postId, isHearted, reactionCount])
 
