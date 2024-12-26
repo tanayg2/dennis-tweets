@@ -6,59 +6,57 @@ import {
   leaveReaction,
 } from "@/app/(main)/(home)/actions"
 import { useUser } from "@/hooks/useUser"
+import { Database } from "@/lib/db.types"
 import { cn } from "@/utils/cn"
 import { Heart } from "lucide-react"
-import { use, useCallback, useEffect, useState, useTransition } from "react"
+import { useCallback, useEffect, useState } from "react"
 
 type HeartButtonProps = {
-  userId: string | null
-  postId: number
-  reactionCount: number
+  post: Database["public"]["Views"]["enriched_posts"]["Row"]
 }
 
 export const HeartButton = (props: HeartButtonProps) => {
   const user = useUser()
-  const [reactionCount, setReactionCount] = useState(props.reactionCount)
+  const [reactionCount, setReactionCount] = useState(
+    props.post.reaction_count ?? 0,
+  )
 
   const [isHearted, setIsHearted] = useState(false)
   useEffect(() => {
     async function run() {
       if (!user.user) return
-      const reaction = await fetchPostReaction(user.user.id, props.postId)
-      console.log("react", reaction)
+      const reaction = await fetchPostReaction(user.user.id, props.post.id)
       setIsHearted(!!reaction?.length)
     }
 
     run()
-  }, [user, props.postId])
+  }, [user, props.post.id])
 
   const handleHeartClick = useCallback(async () => {
-    if (!user.user || !props.postId) return
+    if (!user.user || !props.post.id) return
     console.log(isHearted, "delete")
     if (isHearted) {
       setReactionCount(reactionCount - 1)
       setIsHearted(false)
-      deleteReaction(user.user.id, props.postId)
+      deleteReaction(user.user.id, props.post.id)
     } else {
       setReactionCount(reactionCount + 1)
       setIsHearted(true)
-      leaveReaction(user.user.id, props.postId, "❤️")
+      leaveReaction(user.user.id, props.post.id, "❤️")
     }
-  }, [props.userId, props.postId, isHearted, reactionCount])
+  }, [props.post.id, isHearted, reactionCount])
 
   return (
     <button
       onClick={handleHeartClick}
-      className="py-2 px-4 rounded-lg hover:bg-secondary transition-colors duration-75 inline-flex gap-x-1 items-center justify-center"
+      className="py-2 px-4 rounded-lg hover:bg-secondary transition-colors duration-75 inline-flex gap-x-1 items-center justify-center w-full"
     >
       {isHearted ? (
         <Heart fill="#3f72af" className={cn("text-primary")} size={25} />
       ) : (
         <Heart className={cn("text-primary")} size={25} />
       )}
-      <p className={cn("text-xs text-primary", !reactionCount && "invisible")}>
-        {reactionCount}
-      </p>
+      <p className="text-sm text-primary">{reactionCount}</p>
     </button>
   )
 }
