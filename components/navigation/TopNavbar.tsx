@@ -18,5 +18,6 @@ const resolvePageTitle = (pathname: string) => {
   if (pathname === "/notifications") return "Notifications"
   if (pathname === "/profile") return "Profile"
   if (pathname === "/profile/settings") return "Profile Settings"
+  if (pathname === "/privacy") return "Privacy Policy"
   return "Unknown"
 }
