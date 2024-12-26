@@ -2,7 +2,6 @@ import { Database } from "@/lib/db.types"
 import { getPostType } from "@/lib/utils"
 import { createClient } from "@supabase/supabase-js"
 import { fromPairs } from "lodash"
-import { revalidatePath } from "next/cache"
 
 type VonageRequest = {
   msisdn: string
@@ -41,7 +40,6 @@ export async function POST(request: Request) {
   
   try {
     const res = await supabase.from("posts").insert(newPost)
-    revalidatePath("/timeline")
     return Response.json(res, { status: 200 })
   } catch (e) {
     console.error(e)

@@ -34,7 +34,11 @@ export const Post = (props: PostProps) => {
           {toRelative(new Date(props.post.created_at ?? ""))}
         </time>
       </div>
-      {/* <HeartButton userId={props.post.user_id} postId={props.post.id} /> */}
+      <HeartButton
+        userId={props.post.user_id}
+        postId={props.post.id}
+        reactionCount={props.post.reaction_count ?? 0}
+      />
     </div>
   )
 }

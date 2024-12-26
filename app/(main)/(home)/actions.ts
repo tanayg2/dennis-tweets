@@ -5,17 +5,24 @@ import { createClient } from "@/utils/supabase/server"
 export const fetchPostReactions = async (postId: number) => {
   const supabase = await createClient()
 
+  console.log("fethcing")
   try {
     const res = await supabase
       .from("reactions")
       .select("*")
       .eq("post_id", postId)
-    console.log(postId, res)
-    return res
+      // .then((res) => {
+      //   if (postId === 581) {
+      //     console.log("resp", postId, res)
+      //   }
+      //   return res
+      // })
+    return res.count ?? 0
   } catch (e) {
     console.error(e)
-    return null
+    return 0
   }
+  
 }
 
 export const leaveReaction = async (
@@ -38,6 +45,45 @@ export const leaveReaction = async (
     console.error(e)
     return null
   }
+}
+
+export const deleteReaction = async (
+  userId: string,
+  postId: number,
+) => {
+  const supabase = await createClient()
+
+  try {
+    const res = await supabase
+      .from("reactions")
+      .delete()
+      .eq("user_id", userId)
+      .eq("post_id", postId)
+    return res
+  } catch (e) {
+    console.error(e)
+    return null
+  }
+}
+
+export const fetchPostReaction = async (
+  userId: string,
+  postId: number,
+) => {
+  const supabase = await createClient()
+
+  const { data: reactions, error } = await supabase
+    .from("reactions")
+    .select("*")
+    .eq("user_id", userId)
+    .eq("post_id", postId)
+
+  if (error) {
+    console.error(error)
+    return null
+  }
+
+  return reactions
 }
 
 export const fetchMorePosts = async (page: number, ascending = false) => {
