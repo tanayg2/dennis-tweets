@@ -1,8 +1,7 @@
 "use client"
 
 import { Database } from "@/lib/db.types"
-import { cn } from "@/utils/cn"
-import { MessageCircleMore, SpeechIcon } from "lucide-react"
+import { MessageCircleMore } from "lucide-react"
 
 type CommentButtonProps = {
   post: Database["public"]["Views"]["enriched_posts"]["Row"]
