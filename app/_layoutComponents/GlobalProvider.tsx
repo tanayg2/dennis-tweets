@@ -1,6 +1,6 @@
 "use client"
 
-import { LoginModal } from "../auth/LoginModal"
+import { LoginModal } from "../../components/auth/LoginModal"
 import { SessionWatcher } from "./SessionWatcher"
 
 export const GlobalProvider = () => {

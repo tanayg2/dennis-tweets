@@ -49,12 +49,13 @@ export const HeartButton = (props: HeartButtonProps) => {
   return (
     <button
       onClick={handleHeartClick}
-      className="py-2 px-4 rounded-lg hover:bg-secondary transition-colors duration-75 inline-flex gap-x-1 items-center justify-center w-full"
+      className="inline-flex gap-x-1 items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
+      disabled={!user.user}
     >
       {isHearted ? (
-        <Heart fill="#3f72af" className={cn("text-primary")} size={25} />
+        <Heart fill="#3f72af" className={cn("text-primary")} size={18} />
       ) : (
-        <Heart className={cn("text-primary")} size={25} />
+        <Heart className={cn("text-primary")} size={18} />
       )}
       <p className="text-sm text-primary">{reactionCount}</p>
     </button>

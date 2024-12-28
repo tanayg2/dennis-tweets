@@ -9,10 +9,10 @@ type ShareButtonProps = {
 export const ShareButton = (props: ShareButtonProps) => {
   return (
     <button
-      className="py-2 px-4 rounded-lg hover:bg-secondary transition-colors duration-75 inline-flex gap-x-1 items-center justify-center w-full disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-background"
+      className="inline-flex gap-x-1 items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
       disabled
     >
-      <Share className="text-primary" size={25} />
+      <Share className="text-primary" size={18} />
     </button>
   )
 }
