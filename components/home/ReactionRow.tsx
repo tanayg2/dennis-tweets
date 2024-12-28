@@ -11,10 +11,9 @@ type ReactionsRowProps = {
 
 export const ReactionsRow = (props: ReactionsRowProps) => {
   return (
-    <span className="flex justify-between px-2 gapx-2">
+    <span className="flex items-center px-2 gap-x-3">
       <HeartButton post={props.post} />
       <CommentButton post={props.post} />
-      <ShareButton post={props.post} />
     </span>
   )
 }

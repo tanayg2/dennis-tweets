@@ -12,7 +12,7 @@ export default async function Page() {
 
   return (
     <div>
-      <h1>Welcome to DennisTweets!</h1>
+      <h1>Welcome to Feeds.app!</h1>
 
       <p>Finish setting up your profile to start posting and reacting</p>
 

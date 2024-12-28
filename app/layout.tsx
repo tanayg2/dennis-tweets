@@ -2,7 +2,7 @@ import "./globals.css"
 import { ReactNode } from "react"
 import { BottomNavbar } from "../components/navigation/BottomNavbar"
 import { TopNavbar } from "../components/navigation/TopNavbar"
-import { GlobalProvider } from "@/components/providers/GlobalProvider"
+import { GlobalProvider } from "@/app/_layoutComponents/GlobalProvider"
 import { Metadata, Viewport } from "next"
 
 export const viewport: Viewport = {

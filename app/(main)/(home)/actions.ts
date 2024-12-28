@@ -5,18 +5,11 @@ import { createClient } from "@/utils/supabase/server"
 export const fetchPostReactions = async (postId: number) => {
   const supabase = await createClient()
 
-  console.log("fethcing")
   try {
     const res = await supabase
       .from("reactions")
       .select("*")
       .eq("post_id", postId)
-      // .then((res) => {
-      //   if (postId === 581) {
-      //     console.log("resp", postId, res)
-      //   }
-      //   return res
-      // })
     return res.count ?? 0
   } catch (e) {
     console.error(e)
@@ -100,7 +93,6 @@ export const fetchMorePosts = async (page: number, ascending = false) => {
     .order("created_at", { ascending })
     .limit(pageSize)
     .range(page * pageSize, (page + 1) * pageSize - 1)
-  console.log(posts)
 
   if (error) {
     console.error(error)

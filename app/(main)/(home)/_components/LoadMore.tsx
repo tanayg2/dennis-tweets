@@ -31,7 +31,6 @@ export const LoadMore = () => {
     }
 
     if (inView) {
-      console.log("fetching more posts", page)
       run().then(() => setPage((prev) => prev + 1))
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

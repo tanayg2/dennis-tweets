@@ -5,6 +5,7 @@ import { useMemo } from "react"
 import { toRelative } from "@/lib/utils"
 import { HeartButton } from "./HeartButton"
 import { ReactionsRow } from "./ReactionRow"
+import { ShareButton } from "./ShareButton"
 
 type PostProps = {
   post: Database["public"]["Views"]["enriched_posts"]["Row"]
@@ -27,15 +28,18 @@ export const Post = (props: PostProps) => {
   }, [props.post.type])
 
   return (
-    <div>
-      {Element}
-      <div className="flex justify-between px-2 text-border">
-        {props.post.username ? `@${props.post.username}` : <i>anonymous</i>}
+    <div className="space-y-1">
+      <div className="flex gap-x-1 text-border">
+        {props.post.username ? `@${props.post.username}` : <i>anonymous</i>} ·
         <time className="text-primary italic">
           {toRelative(new Date(props.post.created_at ?? ""))}
         </time>
       </div>
-      <ReactionsRow post={props.post} />
+      {Element}
+      <div className="flex flex-row w-full justify-between items-center px-1">
+        <ReactionsRow post={props.post} />
+        <ShareButton post={props.post} />
+      </div>
     </div>
   )
 }
