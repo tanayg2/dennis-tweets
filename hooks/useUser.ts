@@ -1,4 +1,5 @@
 "use client"
+import { Database } from "@/lib/db.types"
 import { UserEnriched } from "@/lib/types"
 import { createClient } from "@/utils/supabase/client"
 import { User } from "@supabase/supabase-js"
@@ -17,7 +18,7 @@ export const useUser = create<UserState>((set) => ({
   set: (partialState) => set(partialState),
 }))
 
-export const useFetchUser = (fetchUserEnriched: (userId: string) => Promise<UserEnriched | null>) => {
+export const useFetchUser = (fetchUserEnriched: (userId: string) => Promise<Database["public"]["Tables"]["user_details"]["Row"] | null>) => {
   const { set } = useUser()
 
   useEffect(() => {
@@ -31,7 +32,7 @@ export const useFetchUser = (fetchUserEnriched: (userId: string) => Promise<User
         const userDetails = await fetchUserEnriched(user.id)
 
         if (userDetails) {
-          set({ userEnriched: userDetails })
+          set({ userEnriched: {...userDetails, ...user } })
           console.log("User details found", userDetails)
         } else {
           console.error("User details not found")

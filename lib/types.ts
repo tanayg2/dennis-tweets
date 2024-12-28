@@ -1,4 +1,5 @@
 import { User } from "@supabase/supabase-js"
+import { Database } from "./db.types"
 
 export type Source = "twitter" | "tiktok" | "instagram"
 
@@ -9,10 +10,4 @@ export type Post = {
   created_at: string
 }
 
-export type UserDetail = {
-  username?: string
-  profile_picture?: string
-  phone_number?: string
-}
-
-export type UserEnriched = User & UserDetail
+export type UserEnriched = User & Database["public"]["Tables"]["user_details"]["Row"]
