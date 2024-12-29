@@ -6,7 +6,9 @@ import { useLoginModal } from "../../hooks/useLoginModal"
 import { useUser } from "@/hooks/useUser"
 import { cn } from "@/utils/cn"
 import { useIsInstalled } from "@/hooks/useIsInstalled"
-import { useMemo } from "react"
+import { useCallback } from "react"
+import { getToken } from "firebase/messaging"
+import { useMessaging } from "@/app/_layoutComponents/useFirebaseMessaging"
 
 export const BottomNavbar = () => {
   const path = usePathname()
@@ -14,16 +16,21 @@ export const BottomNavbar = () => {
   const { user } = useUser()
   const isInstalled = useIsInstalled()
 
-  const notificationLinkProps = useMemo(() => {
-    if (
-      Notification.permission === "default" ||
-      Notification.permission === "denied"
-    ) {
-      return { onClick: () => Notification.requestPermission(), href: "" }
-    } else {
-      return { href: "/notifications" }
+  const messaging = useMessaging()
+  const registerNotifications = useCallback(() => {
+    if (!messaging) {
+      console.error("Messaging not initialized")
+      return
     }
-  }, [])
+    getToken(messaging, { vapidKey: process.env.NEXT_PUBLIC_VAPID_KEY }).then(
+      (currentToken) => {
+        if (currentToken) {
+        } else {
+          Notification.requestPermission()
+        }
+      },
+    )
+  }, [messaging])
 
   return (
     <>
@@ -36,7 +43,7 @@ export const BottomNavbar = () => {
         <Link href="/">
           <HomeIcon size={24} className={getIconColor(path, "/")} />
         </Link>
-        <Link {...notificationLinkProps}>
+        <Link href="/notifications" onClick={registerNotifications}>
           <BellIcon
             size={24}
             className={getIconColor(path, "/notifications")}
