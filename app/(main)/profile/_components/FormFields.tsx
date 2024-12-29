@@ -6,34 +6,37 @@ import { AddPhoneNumber } from "./AddPhoneNumber"
 import { AddUsername } from "./AddUsername"
 import { useEffect } from "react"
 import { createUserDetails } from "../settings/actions"
+import { User } from "@supabase/supabase-js"
+import { Database } from "@/lib/db.types"
 
-export const FormFields = () => {
-  const { user, userEnriched } = useUser()
-
+export const ProfileForm = (props: {
+  user: User
+  userDetails: Database["public"]["Tables"]["user_details"]["Row"]
+}) => {
   useEffect(() => {
-    if (user && !userEnriched) {
-      createUserDetails(user.id)
+    if (props.user && !props.userDetails) {
+      createUserDetails(props.user.id)
     }
-  }, [user])
+  }, [props.user, props.userDetails])
 
-  if (!user) return null
+  if (!props.user) return null
 
   return (
     <div className="space-y-2">
-      {userEnriched?.username ? (
-        <p>{userEnriched.username}</p>
-      ) : (
-        <AddUsername userId={user.id} />
-      )}
-
-      {userEnriched?.phone_number ? (
-        <p>{userEnriched.phone_number}</p>
-      ) : (
-        <Label htmlFor="phone">
-          Phone number
-          <AddPhoneNumber userId={user.id} />
-        </Label>
-      )}
+      <div>
+        <Label htmlFor="username">Username</Label>
+        <AddUsername
+          userId={props.user.id}
+          defaultValue={props.userDetails.username}
+        />
+      </div>
+      <div>
+        <Label htmlFor="phone">Phone number</Label>
+        <AddPhoneNumber
+          userId={props.user.id}
+          defaultValue={props.userDetails.phone_number ?? undefined}
+        />
+      </div>
     </div>
   )
 }

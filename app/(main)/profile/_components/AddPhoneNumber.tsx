@@ -6,8 +6,11 @@ import { useState } from "react"
 import { parseInt } from "lodash"
 import { updatePhoneNumber } from "../settings/actions"
 
-export const AddPhoneNumber = (props: { userId: string }) => {
-  const [phoneNumber, setPhoneNumber] = useState("")
+export const AddPhoneNumber = (props: {
+  userId: string
+  defaultValue?: number
+}) => {
+  const [phoneNumber, setPhoneNumber] = useState(`${props.defaultValue ?? ""}`)
   return (
     <div className="grid grid-cols-[1fr_80px] gap-x-2">
       <PhoneNumberInput

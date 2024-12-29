@@ -1,5 +1,4 @@
 "use client"
-import { Button } from "@/components/ui/button"
 import { BellIcon, HomeIcon, UserIcon } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -7,12 +6,24 @@ import { useLoginModal } from "../../hooks/useLoginModal"
 import { useUser } from "@/hooks/useUser"
 import { cn } from "@/utils/cn"
 import { useIsInstalled } from "@/hooks/useIsInstalled"
+import { useMemo } from "react"
 
 export const BottomNavbar = () => {
   const path = usePathname()
   const loginModal = useLoginModal()
   const { user } = useUser()
   const isInstalled = useIsInstalled()
+
+  const notificationLinkProps = useMemo(() => {
+    if (
+      Notification.permission === "default" ||
+      Notification.permission === "denied"
+    ) {
+      return { onClick: () => Notification.requestPermission(), href: "" }
+    } else {
+      return { href: "/notifications" }
+    }
+  }, [])
 
   return (
     <>
@@ -25,7 +36,7 @@ export const BottomNavbar = () => {
         <Link href="/">
           <HomeIcon size={24} className={getIconColor(path, "/")} />
         </Link>
-        <Link href="/notifications">
+        <Link {...notificationLinkProps}>
           <BellIcon
             size={24}
             className={getIconColor(path, "/notifications")}

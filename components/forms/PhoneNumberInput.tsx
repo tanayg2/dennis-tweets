@@ -1,9 +1,8 @@
 "use client"
 
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import { ChevronDown, Phone } from "lucide-react"
-import React, { useState } from "react"
+import { forwardRef, InputHTMLAttributes } from "react"
 import * as RPNInput from "react-phone-number-input"
 import flags from "react-phone-number-input/flags"
 
@@ -32,10 +31,9 @@ export default function PhoneNumberInput(props: PhoneNumberInputProps) {
   )
 }
 
-export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {}
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {}
 
-const PhoneInput = React.forwardRef<HTMLInputElement, InputProps>(
+const PhoneInput = forwardRef<HTMLInputElement, InputProps>(
   ({ className, ...props }, ref) => {
     return (
       <Input

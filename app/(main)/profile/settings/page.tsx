@@ -1,12 +1,17 @@
 import { createClient } from "@/utils/supabase/server"
 import { redirect } from "next/navigation"
-import { FormFields } from "../_components/FormFields"
+import { ProfileForm } from "../_components/FormFields"
 
 export default async function Page() {
   const supabase = await createClient()
   const {
     data: { user },
   } = await supabase.auth.getUser()
+  const { data: userDetails } = await supabase
+    .from("user_details")
+    .select("*")
+    .eq("user_id", user?.id ?? "")
+    .single()
 
   if (!user) redirect("/home")
 
@@ -16,7 +21,9 @@ export default async function Page() {
 
       <p>Finish setting up your profile to start posting and reacting</p>
 
-      <FormFields />
+      {user && userDetails && (
+        <ProfileForm user={user} userDetails={userDetails} />
+      )}
     </div>
   )
 }
