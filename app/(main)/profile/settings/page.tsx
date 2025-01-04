@@ -1,6 +1,6 @@
 import { createClient } from "@/utils/supabase/server"
 import { redirect } from "next/navigation"
-import { ProfileForm } from "../_components/FormFields"
+import { ProfileForm } from "../_components/ProfileForm"
 
 export default async function Page() {
   const supabase = await createClient()
@@ -17,10 +17,7 @@ export default async function Page() {
 
   return (
     <div>
-      <h1>Welcome to Feeds.app!</h1>
-
-      <p>Finish setting up your profile to start posting and reacting</p>
-
+      <h1 className="text-xl font-semibold">Edit profile</h1>
       {user && userDetails && (
         <ProfileForm user={user} userDetails={userDetails} />
       )}

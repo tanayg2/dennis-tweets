@@ -105,3 +105,20 @@ export const fetchMorePosts = async (page: number, ascending = false) => {
 
   return result
 }
+
+export const fetchPost = async (postId: string) => {
+  const supabase = await createClient()
+
+  const { data: post, error } = await supabase
+    .from("enriched_posts")
+    .select("*")
+    .eq("id", postId)
+    .single()
+
+  if (error) {
+    console.error(error)
+    return null
+  }
+
+  return post
+}

@@ -8,7 +8,7 @@ import { updatePhoneNumber } from "../settings/actions"
 
 export const AddPhoneNumber = (props: {
   userId: string
-  defaultValue?: number
+  defaultValue: string
 }) => {
   const [phoneNumber, setPhoneNumber] = useState(`${props.defaultValue ?? ""}`)
   return (

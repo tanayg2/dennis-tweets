@@ -1,7 +1,7 @@
 "use client"
 
 import { LoginModal } from "../../components/auth/LoginModal"
-import { FirebaseInitializer } from "./FirebaseInitializer"
+import { FirebaseClientInitializer } from "./FirebaseClientInitializer"
 import { ServiceWorkerRegistration } from "./ServiceWorkerRegistration"
 import { SessionWatcher } from "./SessionWatcher"
 
@@ -11,7 +11,7 @@ export const GlobalProvider = () => {
       <LoginModal />
       <SessionWatcher />
       <ServiceWorkerRegistration />
-      <FirebaseInitializer />
+      <FirebaseClientInitializer />
     </>
   )
 }

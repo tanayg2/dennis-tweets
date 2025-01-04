@@ -13,7 +13,7 @@ export const createUserDetails = async (userId: string) => {
 export const updatePhoneNumber = async (userId: string, phoneNumber: number) => {
   const supabase = await createClient()
 
-  const { data, error } = await supabase.from("user_details").update({ phone_number: phoneNumber }).eq("id", userId)
+  const { data, error } = await supabase.from("user_details").update({ phone_number: phoneNumber }).eq("user_id", userId)
   if (error) {
     console.error(error)
     return null
@@ -25,7 +25,7 @@ export const updateUsername = async (userId: string, username: string) => {
   const supabase = await createClient()
 
   const { data, error } = await supabase.from("user_details").update
-    ({ username }).eq("id", userId)
+    ({ username }).eq("user_id", userId)
   if (error) {
     console.error(error)
     return null

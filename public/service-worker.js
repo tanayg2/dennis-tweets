@@ -16,7 +16,7 @@ const staticFiles = [
 ]
 
 // routes to cache
-const routes = ["/", "/about"]
+const routes = ["/"]
 
 // combine static files and routes to cache
 const filesToCache = [...routes, ...staticFiles]

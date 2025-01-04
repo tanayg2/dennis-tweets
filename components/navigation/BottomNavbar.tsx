@@ -25,6 +25,7 @@ export const BottomNavbar = () => {
     getToken(messaging, { vapidKey: process.env.NEXT_PUBLIC_VAPID_KEY }).then(
       (currentToken) => {
         if (currentToken) {
+          console.log("Token", currentToken)
         } else {
           Notification.requestPermission()
         }

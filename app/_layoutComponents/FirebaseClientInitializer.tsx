@@ -5,7 +5,7 @@ import { getMessaging } from "firebase/messaging"
 import { useEffect } from "react"
 import { useSetFirebaseMessaging } from "./useFirebaseMessaging"
 
-export const FirebaseInitializer = () => {
+export const FirebaseClientInitializer = () => {
   const setMessaging = useSetFirebaseMessaging()
 
   useEffect(() => {
