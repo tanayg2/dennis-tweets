@@ -43,3 +43,16 @@ export const toRelative = (date: Date) => {
 
   return "just now"
 }
+
+export function convertToE164(phoneNumber: string) {
+  // Remove all non-digit characters from the phone number
+  const cleaned = phoneNumber.replace(/\D/g, '');
+  
+  // Check if the cleaned phone number starts with the country code "1"
+  const startsWithOne = cleaned.startsWith('1');
+
+  // Prepend the "+" sign and a space before the country code
+  // If the phone number starts with "1", include it in the output
+  return `+${startsWithOne ? '1' : ''}${cleaned.slice(startsWithOne ? 1 : 0)
+    .replace(/(\d{3})(\d{3})(\d{4})/, '$1$2$3')}`;
+}

@@ -16,7 +16,7 @@ const staticFiles = [
 ]
 
 // routes to cache
-const routes = ["/", "/about"]
+const routes = ["/"]
 
 // combine static files and routes to cache
 const filesToCache = [...routes, ...staticFiles]
@@ -371,8 +371,20 @@ const syncHandler = async (e) => {
   }
 }
 
+const pushHandler = async (e) => {
+  const data = e.data.json()
+  const options = {
+    body: data.body,
+    icon: "icon.png",
+    badge: "badge.png",
+  }
+
+  e.waitUntil(self.registration.showNotification(data.title, options))
+}
+
 self.addEventListener("install", installHandler)
 self.addEventListener("activate", activateHandler)
 self.addEventListener("fetch", fetchHandler)
 self.addEventListener("message", messageHandler)
 self.addEventListener("sync", syncHandler)
+self.addEventListener("push", pushHandler)

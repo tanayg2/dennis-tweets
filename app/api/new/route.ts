@@ -1,6 +1,7 @@
 import { Database } from "@/lib/db.types"
 import { getPostType } from "@/lib/utils"
 import { createClient } from "@supabase/supabase-js"
+import { credential, initializeApp } from "firebase-admin"
 import { fromPairs } from "lodash"
 
 type VonageRequest = {
@@ -36,7 +37,6 @@ export async function POST(request: Request) {
     url,
     type,
   }
-
   
   try {
     const res = await supabase.from("posts").insert(newPost)

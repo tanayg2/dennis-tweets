@@ -1,6 +1,5 @@
 "use client"
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import { LucideProps } from "lucide-react"
 import { createElement, ForwardRefExoticComponent, RefAttributes } from "react"
 

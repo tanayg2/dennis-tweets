@@ -3,7 +3,6 @@ import { Database } from "@/lib/db.types"
 import { InstagramEmbed, TikTokEmbed, XEmbed } from "react-social-media-embed"
 import { useMemo } from "react"
 import { toRelative } from "@/lib/utils"
-import { HeartButton } from "./HeartButton"
 import { ReactionsRow } from "./ReactionRow"
 import { ShareButton } from "./ShareButton"
 
